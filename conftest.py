@@ -1,3 +1,4 @@
+#pytest -v --tb=line --language=en test_main_page.py
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
