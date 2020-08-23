@@ -1,30 +1,34 @@
-#pytest -v --tb=line --language=en test_main_page.py
+# pytest -v --tb=line --language=en test_main_page.py
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
+
 def pytest_addoption(parser):
-    parser.addoption('--browser_name', \
-                     action='store', \
-                     default="chrome",\
+    parser.addoption('--browser_name',
+                     action='store',
+                     default="chrome",
                      help="Choose browser: chrome or firefox")
 
-    parser.addoption('--language',\
-                     action='store',\
-                     default='en',\
-                     help="choose leaguage: ru, en, es...(etc.)")
+    parser.addoption('--language',
+                     action='store',
+                     default='en',
+                     help="choose language: ru, en, es...(etc.)")
 
+
+# noinspection PyGlobalUndefined
 @pytest.fixture(scope="function")
 def browser(request):
+    global browser
     browser_name = request.config.getoption("browser_name")
     user_language = request.config.getoption("language")
-    if (browser_name == "chrome"):
+    if browser_name == "chrome":
         options = Options()
-        options.add_experimental_option('prefs', \
-                                        {'intl.accept_languages':user_language})
+        options.add_experimental_option('prefs',
+                                        {'intl.accept_languages': user_language})
         print("\n\nStart chrome browser for test...")
         browser = webdriver.Chrome(options=options)
-    elif (browser_name == "firefox"):
+    elif browser_name == "firefox":
         fp = webdriver.FirefoxProfile()
         fp.set_preference("intl.accept_languages", user_language)
         print("\n\nStart firefox browser for test...")
@@ -35,9 +39,8 @@ def browser(request):
     print("\nQuit browser...")
     browser.quit()
 
-
-#@pytest.fixture(scope="function")
-#def browser():
+# @pytest.fixture(scope="function")
+# def browser():
 #    print("\nstart browser for test..")
 #    browser = webdriver.Chrome()
 #    browser.implicitly_wait(5)
@@ -46,11 +49,11 @@ def browser(request):
 #    browser.quit()
 
 
-#options = Options()
-#options.add_experimental_option('prefs',\
+# options = Options()
+# options.add_experimental_option('prefs',\
 #                                {'intl.accept_languages': user_language})
-#browser = webdriver.Chrome(options=options)
-#Для Firefox объявление нужного языка будет выглядеть немного иначе:
-#fp = webdriver.FirefoxProfile()
-#fp.set_preference("intl.accept_languages", user_language)
-#browser = webdriver.Firefox(firefox_profile=fp)
+# browser = webdriver.Chrome(options=options)
+# Для Firefox объявление нужного языка будет выглядеть немного иначе:
+# fp = webdriver.FirefoxProfile()
+# fp.set_preference("intl.accept_languages", user_language)
+# browser = webdriver.Firefox(firefox_profile=fp)
