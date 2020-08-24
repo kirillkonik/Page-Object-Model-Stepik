@@ -1,6 +1,7 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
-
+import time
+from faker import Faker
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
@@ -19,3 +20,16 @@ class LoginPage(BasePage):
         login = "login"
         assert login in current_url, \
             f"Current URL is not consider '{login}'  '{current_url}'"
+
+    def register_new_user(self):
+        f = Faker()
+        email = f.email()
+        password = f.password()
+        print(email, password)
+        email_field = self.browser.find_element(*LoginPageLocators.REGISTRATION_EMAIL_FIELD).send_keys(email)
+        pass1 = self.browser.find_element(*LoginPageLocators.REGISTRATION_FIRST_PASSWORD_FIELD).send_keys(password)
+        pass2 = self.browser.find_element(*LoginPageLocators.REGISTRATION_SECOND_PASSWORD_FIELD).send_keys(password)
+        reg_butt = self.browser.find_element(*LoginPageLocators.REGISTRATION_BUTTON).click()
+
+
+
