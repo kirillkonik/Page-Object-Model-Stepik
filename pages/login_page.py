@@ -3,6 +3,7 @@ from .locators import LoginPageLocators
 import time
 from faker import Faker
 
+
 class LoginPage(BasePage):
     def should_be_login_page(self):
         self.should_be_login_url()
@@ -30,6 +31,3 @@ class LoginPage(BasePage):
         pass1 = self.browser.find_element(*LoginPageLocators.REGISTRATION_FIRST_PASSWORD_FIELD).send_keys(password)
         pass2 = self.browser.find_element(*LoginPageLocators.REGISTRATION_SECOND_PASSWORD_FIELD).send_keys(password)
         reg_butt = self.browser.find_element(*LoginPageLocators.REGISTRATION_BUTTON).click()
-
-
-
