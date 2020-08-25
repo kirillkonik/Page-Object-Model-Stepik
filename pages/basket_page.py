@@ -33,8 +33,6 @@ class BasketPage(BasePage):
         }
         current_language = self.browser.execute_script(
             "return window.navigator.userLanguage || window.navigator.language")
-        print(current_language)
         text_about_empty_page = self.browser.find_element(*BasketPageLocators.BASKET_IS_EMPTY).text
-        print(text_about_empty_page)
         assert languages[current_language] in text_about_empty_page, \
             "Text about empty cart was not found!"

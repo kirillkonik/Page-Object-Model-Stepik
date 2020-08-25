@@ -20,14 +20,13 @@ class LoginPage(BasePage):
         current_url = self.browser.current_url
         login = "login"
         assert login in current_url, \
-            f"Current URL is not consider '{login}'  '{current_url}'"
+            f"Current URL is not consider '{login}' in current_url: '{current_url}'"
 
     def register_new_user(self):
         f = Faker()
         email = f.email()
         password = f.password()
-        print(email, password)
         email_field = self.browser.find_element(*LoginPageLocators.REGISTRATION_EMAIL_FIELD).send_keys(email)
         pass1 = self.browser.find_element(*LoginPageLocators.REGISTRATION_FIRST_PASSWORD_FIELD).send_keys(password)
         pass2 = self.browser.find_element(*LoginPageLocators.REGISTRATION_SECOND_PASSWORD_FIELD).send_keys(password)
-        reg_butt = self.browser.find_element(*LoginPageLocators.REGISTRATION_BUTTON).click()
+        registration_button = self.browser.find_element(*LoginPageLocators.REGISTRATION_BUTTON).click()

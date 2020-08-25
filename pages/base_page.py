@@ -58,9 +58,6 @@ class BasePage:
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
-        # alert = self.browser.swich_to.alert
-        # alert.accept()
-        # # return LoginPage(browser=self.browser, url=self.browser.current_url)
 
     def should_be_authorized_user(self):
         assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
